@@ -28,8 +28,8 @@
         --radius-lg: 14px;
         --radius-sm: 8px;
         --transition-fast: 0.15s ease-out;
-        --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
+        --font-main:
+          system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
 
       * {
@@ -40,7 +40,12 @@
         margin: 0;
         padding: 0;
         min-height: 100vh;
-        background: radial-gradient(circle at top, #050815 0, #000 40%, #000 100%);
+        background: radial-gradient(
+          circle at top,
+          #050815 0,
+          #000 40%,
+          #000 100%
+        );
         color: var(--fg);
         font-family: var(--font-main);
         display: flex;
@@ -178,7 +183,12 @@
       }
 
       .card {
-        background: linear-gradient(145deg, #05060a 0, #050816 60%, #05060a 100%);
+        background: linear-gradient(
+          145deg,
+          #05060a 0,
+          #050816 60%,
+          #05060a 100%
+        );
         border-radius: var(--radius-lg);
         padding: 14px 16px 16px;
         border: 1px solid var(--card-border);
@@ -226,9 +236,12 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        transition: background var(--transition-fast),
-          border-color var(--transition-fast), transform var(--transition-fast),
-          box-shadow var(--transition-fast), opacity var(--transition-fast);
+        transition:
+          background var(--transition-fast),
+          border-color var(--transition-fast),
+          transform var(--transition-fast),
+          box-shadow var(--transition-fast),
+          opacity var(--transition-fast);
         white-space: nowrap;
         text-decoration: none;
       }
@@ -278,11 +291,8 @@
     <header>
       <div class="title-block">
         <h1>Vetherion</h1>
-        <p>Universe hub • releases • experiments</p>
+        <p>Universe Hub • releases • experiments</p>
       </div>
-      <a class="nav-link" href="https://hexryth.vetherion.com" rel="noopener">
-        <span>▶</span> Hexryth
-      </a>
     </header>
 
     <main>
@@ -311,15 +321,24 @@
             titles.
           </p>
           <div class="pill-row">
-            <a class="btn primary" href="https://hexryth.vetherion.com" rel="noopener">
+            <a
+              class="btn primary"
+              href="https://hexryth.vetherion.com"
+              target="_blank"
+              rel="noopener"
+            >
               ▶ Play Hexryth
             </a>
-            <a class="btn secondary" href="https://vetherion.dev" rel="noopener">
+            <a
+              class="btn secondary"
+              href="https://vetherion.dev"
+              target="_blank"
+              rel="noopener"
+            >
               Dev notes
             </a>
           </div>
           <p class="tiny">
-            Tip: bookmark this page — it’ll stay boring on purpose.
           </p>
         </section>
 
@@ -330,16 +349,12 @@
             - More Vetherion titles (same universe, different loops)<br />
             - A small devlog archive on <strong>vetherion.dev</strong>
           </p>
-          <p class="tiny">
-            Want updates? Check back here. No spam. No signup.
-          </p>
+          <p class="tiny">Want updates? Check back here. No spam. No signup.</p>
         </aside>
       </div>
     </main>
 
-    <footer>
-      © 2026 jm5k • Vetherion Universe
-    </footer>
+    <footer>© 2026 jm5k • Vetherion Universe</footer>
 
     <script>
       // Simple “rail fill” animation to match the Temporal Forge vibe
