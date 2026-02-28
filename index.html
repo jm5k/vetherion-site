@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Vetherion universe hub — updates, releases, and access to Hexryth."
+    />
+    <title>Vetherion</title>
+
+    <style>
+      /* Core theme */
+      :root {
+        --bg: #000;
+        --fg: #e0e0e0;
+        --muted: #9aa0aa;
+        --accent: #00ffff;
+        --accent-soft: rgba(0, 255, 255, 0.15);
+        --rail: #111;
+        --rail-border: #333;
+        --card: #05060a;
+        --card-border: #222;
+        --danger: #ff4f4f;
+        --success: #7bff7b;
+        --shadow-soft: 0 0 30px rgba(0, 255, 255, 0.15);
+        --radius-lg: 14px;
+        --radius-sm: 8px;
+        --transition-fast: 0.15s ease-out;
+        --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, #050815 0, #000 40%, #000 100%);
+        color: var(--fg);
+        font-family: var(--font-main);
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      header {
+        padding: 16px 6vw 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      header .title-block {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      header h1 {
+        font-size: 1.4rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      header p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .nav-link {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+        background: rgba(0, 0, 0, 0.6);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+      }
+
+      .nav-link span {
+        font-size: 0.9rem;
+      }
+
+      main {
+        padding: 0 6vw 24px;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto 16px;
+        position: relative;
+      }
+
+      /* Day rail */
+      .day-rail {
+        margin: 4px 0 20px;
+        padding: 10px 0 12px;
+      }
+
+      .rail-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .rail-track {
+        position: relative;
+        height: 12px;
+        border-radius: 999px;
+        background: var(--rail);
+        border: 1px solid var(--rail-border);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .rail-fill {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(0, 255, 255, 0.2),
+          rgba(0, 255, 255, 0.9),
+          rgba(0, 255, 255, 0.2)
+        );
+        transform-origin: left center;
+        transform: scaleX(0);
+        transition: transform 0.4s ease-out;
+      }
+
+      .rail-marker {
+        position: absolute;
+        top: 50%;
+        width: 3px;
+        height: 22px;
+        background: var(--accent);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.9);
+        transform: translate(-50%, -50%);
+      }
+
+      .rail-meta {
+        margin-top: 4px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      /* Layout */
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        gap: 18px;
+      }
+
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      .card {
+        background: linear-gradient(145deg, #05060a 0, #050816 60%, #05060a 100%);
+        border-radius: var(--radius-lg);
+        padding: 14px 16px 16px;
+        border: 1px solid var(--card-border);
+        box-shadow: 0 0 18px rgba(0, 0, 0, 0.7);
+      }
+
+      .card h2 {
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--muted);
+        margin: 0 0 10px;
+      }
+
+      .card p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.55;
+      }
+
+      .card p strong {
+        color: var(--fg);
+        font-weight: 600;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+        align-items: center;
+      }
+
+      button,
+      .btn {
+        cursor: pointer;
+        border-radius: 999px;
+        border: 1px solid var(--card-border);
+        background: rgba(0, 0, 0, 0.6);
+        color: var(--fg);
+        padding: 8px 14px;
+        font-size: 0.86rem;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: background var(--transition-fast),
+          border-color var(--transition-fast), transform var(--transition-fast),
+          box-shadow var(--transition-fast), opacity var(--transition-fast);
+        white-space: nowrap;
+        text-decoration: none;
+      }
+
+      .btn.primary {
+        border-color: rgba(0, 255, 255, 0.8);
+        box-shadow: 0 0 14px rgba(0, 255, 255, 0.25);
+      }
+
+      .btn.primary:hover {
+        background: linear-gradient(90deg, #041f24, #062a32);
+        transform: translateY(-1px);
+        text-decoration: none;
+      }
+
+      .btn.secondary:hover {
+        background: rgba(255, 255, 255, 0.06);
+        transform: translateY(-1px);
+        text-decoration: none;
+      }
+
+      .tiny {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      /* Footer */
+      footer {
+        padding: 10px 6vw 14px;
+        border-top: 1px solid #111;
+        font-size: 0.75rem;
+        color: var(--muted);
+        text-align: center;
+        width: 100%;
+      }
+
+      @media (max-width: 600px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="title-block">
+        <h1>Vetherion</h1>
+        <p>Universe hub • releases • experiments</p>
+      </div>
+      <a class="nav-link" href="https://hexryth.vetherion.com" rel="noopener">
+        <span>▶</span> Hexryth
+      </a>
+    </header>
+
+    <main>
+      <section class="day-rail" aria-label="Status rail">
+        <div class="rail-label">
+          <span>Status</span>
+          <span>Live</span>
+        </div>
+        <div class="rail-track" role="img" aria-label="Vetherion status">
+          <div id="railFill" class="rail-fill"></div>
+          <div class="rail-marker" style="left: 86%"></div>
+        </div>
+        <div class="rail-meta">
+          <span>Hub online</span>
+          <span>Next: more soon</span>
+        </div>
+      </section>
+
+      <div class="grid">
+        <section class="card">
+          <h2>What this is</h2>
+          <p>
+            <strong>Vetherion</strong> is a shared universe for small, fast,
+            gameplay experiments and longer-running projects. This page is the
+            public hub: stable links, short updates, and a launch point for new
+            titles.
+          </p>
+          <div class="pill-row">
+            <a class="btn primary" href="https://hexryth.vetherion.com" rel="noopener">
+              ▶ Play Hexryth
+            </a>
+            <a class="btn secondary" href="https://vetherion.dev" rel="noopener">
+              Dev notes
+            </a>
+          </div>
+          <p class="tiny">
+            Tip: bookmark this page — it’ll stay boring on purpose.
+          </p>
+        </section>
+
+        <aside class="card">
+          <h2>What’s coming</h2>
+          <p>
+            - Hexryth updates and balance passes<br />
+            - More Vetherion titles (same universe, different loops)<br />
+            - A small devlog archive on <strong>vetherion.dev</strong>
+          </p>
+          <p class="tiny">
+            Want updates? Check back here. No spam. No signup.
+          </p>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      © 2026 jm5k • Vetherion Universe
+    </footer>
+
+    <script>
+      // Simple “rail fill” animation to match the Temporal Forge vibe
+      requestAnimationFrame(() => {
+        const fill = document.getElementById("railFill");
+        if (fill) fill.style.transform = "scaleX(0.86)";
+      });
+    </script>
+  </body>
+</html>
